@@ -28,7 +28,7 @@ jobs:
       - name: Build and push backend image
         uses: docker/build-push-action@v5
         with:
-          context: .                           # Kontekst build-a (folder u kome se nalazi Dockerfile)
+          context: ./WebApplication1                           # Kontekst build-a (folder u kome se nalazi Dockerfile)
           file: ./WebApplication1/Dockerfile   # Put do Dockerfile-a
           push: true                           # Šalje image na Docker Hub
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/weather-backend:latest  # Naziv slike na hub-u
