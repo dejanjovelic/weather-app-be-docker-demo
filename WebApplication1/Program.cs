@@ -23,10 +23,12 @@ builder.Services.AddCors(options =>
             });
 });
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+connectionString ??= "Host=weather-postgres;Port=5432;Database=weatherdb;Username=postgres;Password=postgres";
+
 //Povezivanje sa PostgreSQL bazom
 builder.Services.AddDbContext<AppDbContext>(options =>
-options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-Console.WriteLine(builder.Configuration.GetConnectionString("DefaultConnection"));
+options.UseNpgsql(connectionString));
 
 builder.Services.AddAutoMapper(cfg =>
 {
@@ -39,7 +41,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    // Ovo komanduje bazi da se sama kreira prema vašem modelu
+    // Ovo komanduje bazi da se sama kreira prema modelu
     dbContext.Database.EnsureCreated();
 }
 
