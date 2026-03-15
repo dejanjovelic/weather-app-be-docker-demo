@@ -24,7 +24,7 @@ builder.Services.AddCors(options =>
 });
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-connectionString ??= "Host=weather-p;Port=5432;Database=weatherdb;Username=adn;Password=adn";
+connectionString ??= "Host=weather-postgres;Port=5432;Database=weatherdb;Username=postgres;Password=postgres";
 
 //Povezivanje sa PostgreSQL bazom
 builder.Services.AddDbContext<AppDbContext>(options =>
