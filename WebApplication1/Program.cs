@@ -36,13 +36,6 @@ builder.Services.AddAutoMapper(cfg =>
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    // Ovo komanduje bazi da se sama kreira prema modelu
-    dbContext.Database.EnsureCreated();
-}
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
